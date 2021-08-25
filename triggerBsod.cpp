@@ -6,10 +6,10 @@
 
 #pragma comment(lib, "ntdll.lib")
 
-EXTERN_C NTSTATUS NTAPI RtAdjustPrivilege(ULONG, BOOLEAN, BOOLEAN, PBOOLEAN);
+extern "C" NTSTATUS NTAPI RtlAdjustPrivilege(ULONG Privilege, BOOLEAN Enable, BOOLEAN CurrThread, PBOOLEAN StatusPointer);
 
 /* Calling a Hard Error creates a snapshot of your memory, in %SystemRoot% with the name 'memory.dmp' (this file can take up tons of space, I'd advise to delete it after) */
-EXTERN_C NTSTATUS NTAPI NtRaiseHardError(NTSTATUS ErrorStatus, ULONG NumberOfParameters, ULONG UnicodeStringParameterMask,
+extern "C" NTSTATUS NTAPI NtRaiseHardError(NTSTATUS ErrorStatus, ULONG NumberOfParameters, ULONG UnicodeStringParameterMask,
     PULONG_PTR Parameters, ULONG ValidResponseOption, PULONG Response);
 
 
