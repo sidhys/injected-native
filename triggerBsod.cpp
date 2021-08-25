@@ -1,8 +1,7 @@
-/* Calling the Windows API */
 #include <Windows.h>
+#include <winternl.h>
 
-/* On some compilers, main is defined as SDL_main (see https://stackoverflow.com/a/30189915) */
-#undef main
+using namespace std; 
 
 #pragma comment(lib, "ntdll.lib")
 
@@ -17,7 +16,7 @@ int main()
 {
     BOOLEAN bl;
     unsigned long response;
-    RtAdjustPrivilege(19, true, false, &bl);
+    RtlAdjustPrivilege(19, true, false, &bl);
     NtRaiseHardError(STATUS_ASSERTION_FAILURE, 0, 0, 0, 6, &response);
     return 0;
 }
