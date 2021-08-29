@@ -1,7 +1,7 @@
 #include <Windows.h>
-#include <winternl.h>
+#include <winternl.h> // Removable 
 
-using namespace std; 
+using namespace std; // Removable 
 
 #pragma comment(lib, "ntdll.lib")
 
