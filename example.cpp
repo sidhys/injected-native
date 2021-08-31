@@ -1,14 +1,15 @@
 #include "triggerBSOD.hpp"
 
 using namespace triggerBsodNamespace;
+using namespace std;
 
 int main() 
 {
 
-    std::cout << "Blue Screen of Death trigger\n";
+    cout << "Blue Screen of Death trigger\n";
 
     system("pause");
 
-     triggerBsod::raiseHardError(); 
-     return 0; 
+    triggerBsod::raiseHardError(); 
+    return 0; 
 }
