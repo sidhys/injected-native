@@ -87,9 +87,6 @@ DrawSys32Icon
     DeleteDC(hdcMem);
     DeleteObject(di);
 
-
-
-
     return nullptr;
 }
 
@@ -135,8 +132,10 @@ DrawDumbCircle
 		}
 		BitBlt(whdc, 0, 0, scrw, scrh, ssdc, scrx, scry, SRCCOPY);
 		Sleep(50);
-        counter++;
-	}
+       		counter++;
+	} 
+	
+     return nullptr;
 }
 
 
