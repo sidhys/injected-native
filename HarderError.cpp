@@ -85,7 +85,7 @@ DrawSys32Icon
     GetObject( (HGDIOBJ) bi, sizeof(bm), &bm);
     BitBlt(whdc, 10, 10, bm.bmWidth, bm.bmHeight, hdcMem, 0, 0, SRCCOPY);
     DeleteDC(hdcMem);
-    DeleteObject(di);
+    DeleteObject(bi);
 
     return nullptr;
 }
