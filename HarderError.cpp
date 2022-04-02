@@ -77,7 +77,7 @@ DrawSys32Icon
     int y = GetSystemMetrics(SM_CYSCREEN);
 
     HBITMAP bi = (HBITMAP) LoadImage(0, 
-        "C:\\Windows\\System32\\BluetoothPairingSystemToastIcon.contrast-high.png", /* not always present! change accordingly */
+        L"C:\\Windows\\System32\\BluetoothPairingSystemToastIcon.contrast-high.png", /* not always present! change accordingly */
         IMAGE_BITMAP, x, y, LR_LOADFROMFILE);
     HDC whdc = GetDC(NULL);
     HDC hdcMem = CreateCompatibleDC(whdc);
