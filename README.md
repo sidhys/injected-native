@@ -4,8 +4,5 @@ https://user-images.githubusercontent.com/62297115/162573364-1dc6a1c6-5472-4933-
 
 
 
-diff file name^
-
-
 alot of this project is taken from MEMZ 
 
