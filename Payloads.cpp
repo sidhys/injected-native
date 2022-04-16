@@ -167,27 +167,3 @@ void GTDesktop(void) {
 	ip.ki.wVk = VK_LWIN;
 	SendInput(1, &ip, sizeof(INPUT));
 }
-
-/* doesnt work! try registry HKCU\Software\Microsoft\Windows\Shell\Bags\1\Desktop\IconLayouts */
-void DShuffle(void) {
-	HWND hd;
-	HANDLE he;
-	DWORD pi;
-
-	hd = FindWindowA("Progman", NULL);
-	hd = FindWindowEx(hd, 0, L"WorkerW", NULL);
-	if (!hd)
-		ExitProcess(100);
-	hd = FindWindowEx(hd, 0, L"SysListView32", NULL);
-	if (!hd)
-		ExitProcess(1000);
-	GetWindowThreadProcessId(hd, &pi);
-	he = OpenProcess(PROCESS_VM_OPERATION | PROCESS_VM_WRITE | PROCESS_VM_READ, false, pi);
-	POINT *pc = (POINT*)VirtualAllocEx(he, NULL, sizeof(POINT), MEM_COMMIT, PAGE_READWRITE);
-	WriteProcessMemory(he, pc, &pc, sizeof(POINT), NULL);
-	for (int i = 0; i < 100; i++) {
-		ListView_SetItemPosition(hd, 0, i, i);
-		Sleep(10);
-	}
-	VirtualFreeEx(he, pc, 0, MEM_RELEASE);
-} 
