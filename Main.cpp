@@ -253,7 +253,16 @@ int WINAPI wWinMain(
     __in LPWSTR lpCmdLine,
     __in int nShowCmd
 ) {
-    Sleep(100);
+
+
+    if (MessageBoxA(NULL, "The software you just executed is considered malware.\r\n\
+If you have real data on your machine, or simply don't want to execute this program, press No.\n\
+If you do want to execute, press Yes at your own risk.", "Malware Alert!", MB_YESNO | MB_ICONWARNING) != IDYES) {
+        ExitProcess(0);
+    }
+
+
+    Sleep(1000);
     GTDesktop();
     HDC __hdc;
     int w = GetSystemMetrics(0), h = GetSystemMetrics(1);
@@ -262,10 +271,10 @@ int WINAPI wWinMain(
         BitBlt(
             __hdc, rand() % 2, rand() % 2, w, h, __hdc,
             rand() % 2, rand() % 2, SRCAND);
-        Sleep(10);
+        Sleep(1000);
     }
     GTDesktop();
-    Sleep(10);
+    Sleep(1000);
     GTDesktop();
     Sleep(10);
     std::atomic_bool quit_flag(false);
@@ -273,7 +282,9 @@ int WINAPI wWinMain(
     std::atomic_bool ddelayed_quit_flag(false);
     srand((unsigned int)time(NULL));
     thread a(ScrMove, std::ref(quit_flag));
+    Sleep(1000);
     thread b(rainb, std::ref(delayed_quit_flag));
+    Sleep(1000);
     thread c(scrshake, std::ref(ddelayed_quit_flag));
     thread SomeTrolling(gay);
     Sleep(10000);
@@ -289,11 +300,11 @@ int WINAPI wWinMain(
         Sleep(500);
         x = rand() % (1920);
         y = rand() % (1080);
-        payloadChangeText();
     }
     ddelayed_quit_flag = true;
     sus();
-    ShellExecuteA(NULL, "open", "ntoskrnl.exe", NULL, NULL, 10);
+    ShellExecuteA(NULL, "open", "ribbons.scr", NULL, NULL, 10);
+    ShellExecuteA(NULL, "open", "ribbons.scr", NULL, NULL, 10);
     Sleep(3000);
     Glitch();
     delayed_quit_flag = true;
