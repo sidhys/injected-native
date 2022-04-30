@@ -1,0 +1,62 @@
+MUI_386_OBJECTS=
+
+386_OBJECTS= \
+    $(_OBJ_DIR)\i386\display.obj \
+    $(_OBJ_DIR)\i386\file.obj \
+    $(_OBJ_DIR)\i386\hardware.obj \
+    $(_OBJ_DIR)\i386\input.obj \
+    $(_OBJ_DIR)\i386\main.obj \
+    $(_OBJ_DIR)\i386\sysinfo.obj \
+    $(_OBJ_DIR)\i386\keytrans.obj \
+    $(_OBJ_DIR)\i386\shell.obj \
+    $(_OBJ_DIR)\i386\process.obj \
+    $(_OBJ_DIR)\i386\ntfile.obj \
+    $(_OBJ_DIR)\i386\ntreg.obj
+
+MUI_IA64_OBJECTS=
+
+IA64_OBJECTS= \
+    $(_OBJ_DIR)\ia64\display.obj \
+    $(_OBJ_DIR)\ia64\file.obj \
+    $(_OBJ_DIR)\ia64\hardware.obj \
+    $(_OBJ_DIR)\ia64\input.obj \
+    $(_OBJ_DIR)\ia64\main.obj \
+    $(_OBJ_DIR)\ia64\sysinfo.obj \
+    $(_OBJ_DIR)\ia64\keytrans.obj \
+    $(_OBJ_DIR)\ia64\shell.obj \
+    $(_OBJ_DIR)\ia64\process.obj \
+    $(_OBJ_DIR)\ia64\ntfile.obj \
+    $(_OBJ_DIR)\ia64\ntreg.obj
+
+MUI_AMD64_OBJECTS=
+
+AMD64_OBJECTS= \
+    $(_OBJ_DIR)\amd64\display.obj \
+    $(_OBJ_DIR)\amd64\file.obj \
+    $(_OBJ_DIR)\amd64\hardware.obj \
+    $(_OBJ_DIR)\amd64\input.obj \
+    $(_OBJ_DIR)\amd64\main.obj \
+    $(_OBJ_DIR)\amd64\sysinfo.obj \
+    $(_OBJ_DIR)\amd64\keytrans.obj \
+    $(_OBJ_DIR)\amd64\shell.obj \
+    $(_OBJ_DIR)\amd64\process.obj \
+    $(_OBJ_DIR)\amd64\ntfile.obj \
+    $(_OBJ_DIR)\amd64\ntreg.obj
+
+MUI_ARM_OBJECTS=
+
+ARM_OBJECTS= \
+    $(_OBJ_DIR)\arm\display.obj \
+    $(_OBJ_DIR)\arm\file.obj \
+    $(_OBJ_DIR)\arm\hardware.obj \
+    $(_OBJ_DIR)\arm\input.obj \
+    $(_OBJ_DIR)\arm\main.obj \
+    $(_OBJ_DIR)\arm\sysinfo.obj \
+    $(_OBJ_DIR)\arm\keytrans.obj \
+    $(_OBJ_DIR)\arm\shell.obj \
+    $(_OBJ_DIR)\arm\process.obj \
+    $(_OBJ_DIR)\arm\ntfile.obj \
+    $(_OBJ_DIR)\arm\ntreg.obj
+
+PRECOMPILED_INCLUDE_BASENAME=precomp.h
+

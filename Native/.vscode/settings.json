@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "mmtypes.h": "c",
+        "umtypes.h": "c",
+        "ntdef.h": "c"
+    }
+}
