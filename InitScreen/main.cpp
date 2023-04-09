@@ -66,20 +66,20 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
     float fAngle = 0.0f;
     int r = 0, g = 0, b = 0;
-    double gay = 0;
+    double gdb = 0;
 
     while (!glfwWindowShouldClose(window))
     {
         using namespace std;
 
         glClearColor(r,g,b,0);
-        gay += 0.00001;
-        if (gay == 1)
+        gdb += 0.00001;
+        if (gdb == 1)
         {
             r++;
             g++;
             b++;
-            gay = 0;
+            gdb = 0;
         }
 
         glLoadIdentity();
