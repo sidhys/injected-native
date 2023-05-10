@@ -1,92 +1,106 @@
 #define GLFW_EXPOSE_NATIVE_WIN32
+
+// Include necessary libraries
 #include <windows.h>
 #include <GLFW/glfw3.h>
 #include <GLFW/glfw3native.h>
 #include <iostream>
 #include <time.h>
 
-
-#include <windows.h>
-
-
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
+    // Suppress unused parameter warnings
     UNREFERENCED_PARAMETER(hInstance);
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
     UNREFERENCED_PARAMETER(nShowCmd);
 
-    clock_t timeStart = clock();
+    // Get the start time
+    clock_t startTime = clock();
 
-    GLFWwindow* window;
-    int windowSizeW = 1920, windowSizeH = 1080;
+    // Declare a pointer to a GLFWwindow object
+    GLFWwindow* mainWindow;
+    
+    // Set window dimensions
+    int windowWidth = 1920, windowHeight = 1080;
 
+    // Initialize the GLFW library
     if (!glfwInit())
         return -1;
 
+    // Set the GLFW window hint for a transparent framebuffer
     glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, GLFW_TRUE);
-    int count, windowWidth, windowHeight, monitorX, monitorY;
+    
+    // Declare variables to hold monitor details
+    int monitorCount, screenWidth, screenHeight, monitorPosX, monitorPosY;
 
-    GLFWmonitor** monitors = glfwGetMonitors(&count);
+    // Get monitor details
+    GLFWmonitor** monitors = glfwGetMonitors(&monitorCount);
     const GLFWvidmode* videoMode = glfwGetVideoMode(monitors[0]);
 
-    windowWidth = static_cast<int>(videoMode->width / 1);
+    screenWidth = static_cast<int>(videoMode->width / 1);
+    screenHeight = static_cast<int>(videoMode->height / 16 * 9);
+    glfwGetMonitorPos(monitors[0], &monitorPosX, &monitorPosY);
 
-    windowHeight = static_cast<int>(videoMode->height / 16 * 9);
-
-    glfwGetMonitorPos(monitors[0], &monitorX, &monitorY);
-
+    // Set additional GLFW window hints
     glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, 1);
-
-
     glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 
-    window = glfwCreateWindow(windowSizeW, windowSizeH, "..............", NULL, NULL);
-    if (!window)
+    // Create a window and a OpenGL context
+    mainWindow = glfwCreateWindow(windowWidth, windowHeight, "Window", NULL, NULL);
+    if (!mainWindow)
     {
         glfwTerminate();
         return -1;
     }
 
-    HWND hwn = glfwGetWin32Window(window);
-    DWORD style = GetWindowLong(hwn, GWL_EXSTYLE);
-    SetWindowLong(hwn, GWL_EXSTYLE, (style & ~WS_EX_APPWINDOW) | WS_EX_TOOLWINDOW);
+    // Get the HWND of the window and set window styles
+    HWND hwnd = glfwGetWin32Window(mainWindow);
+    DWORD style = GetWindowLong(hwnd, GWL_EXSTYLE);
+    SetWindowLong(hwnd, GWL_EXSTYLE, (style & ~WS_EX_APPWINDOW) | WS_EX_TOOLWINDOW);
 
-    glfwMakeContextCurrent(window);
+    // Make the context of the specified window current
+    glfwMakeContextCurrent(mainWindow);
 
+    // Reset all window hints to their default values
     glfwDefaultWindowHints();
 
-    glfwSetWindowPos(window,
-        monitorX ,
-        monitorY);
+    // Set the window position
+    glfwSetWindowPos(mainWindow, monitorPosX, monitorPosY);
 
-    glfwShowWindow(window);
+        // Make the window visible
+    glfwShowWindow(mainWindow);
 
-    glfwSetWindowAttrib(window, GLFW_DECORATED, GLFW_FALSE);
+    // Set window attributes
+    glfwSetWindowAttrib(mainWindow, GLFW_DECORATED, GLFW_FALSE);
 
-    float fAngle = 0.0f;
-    int r = 0, g = 0, b = 0;
-    double gdb = 0;
+    // Initialize variables for color and rotation
+    float rotationAngle = 0.0f;
+    int red = 0, green = 0, blue = 0;
+    double colorIncrement = 0;
 
-    while (!glfwWindowShouldClose(window))
+    // Enter the main event loop
+    while (!glfwWindowShouldClose(mainWindow))
     {
-        using namespace std;
-
-        glClearColor(r,g,b,0);
-        gdb += 0.00001;
-        if (gdb == 1)
+        // Clear the buffer to the specified color
+        glClearColor(red, green, blue, 0);
+        
+        colorIncrement += 0.00001;
+        if (colorIncrement == 1)
         {
-            r++;
-            g++;
-            b++;
-            gdb = 0;
+            red++;
+            green++;
+            blue++;
+            colorIncrement = 0;
         }
 
+        // Replace the current matrix with the identity matrix
         glLoadIdentity();
-        glRotatef(fAngle, 10, 100, 1);
-        glBegin(GL_QUADS
+        // Rotate the matrix
+        glRotatef(rotationAngle, 10, 100, 1);
 
-        );
+        // Begin drawing quadrilaterals
+        glBegin(GL_QUADS);
         glColor3f(0, 0, 1);
         glVertex3f(-5.5, 2, 1);
         glColor3f(0, 1, 5);
@@ -97,16 +111,20 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         glVertex3f(-0.5, 10.5, -1);
         glEnd();
             
-        fAngle += 0.2;  
+        rotationAngle += 0.2;
 
-        glfwSwapBuffers(window);
+        // Swap front and back buffers
+        glfwSwapBuffers(mainWindow);
 
+        // Poll for and process events
         glfwPollEvents();
 
-        if ((clock() - timeStart) / CLOCKS_PER_SEC >= 10) 
+        // Exit loop after 10 seconds
+        if ((clock() - startTime) / CLOCKS_PER_SEC >= 10) 
             break;
     }
 
+    // Clean up and close GLFW
     glfwTerminate();
     return 0;
 }
