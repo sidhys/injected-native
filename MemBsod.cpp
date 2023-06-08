@@ -76,6 +76,9 @@ VOID tMemSpamSub
 {
     int curr = 100;
     while (curr != 0) {
+        __asm {
+            pop eax
+        } // fix dumb err
         EnumChildWindows(GetDesktopWindow(), &lpEnumFunc, NULL);
         curr--;
     }
@@ -85,8 +88,6 @@ VOID tMemSpam
     (int nThreads)
 {
     std::vector<HANDLE> threadHandles;
-
-    /* if nThreads is below 0, this becomes endless */
 
     while (nThreads != 0) {
         HANDLE handle = CreateThread(NULL, 0,
