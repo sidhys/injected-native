@@ -40,7 +40,7 @@ print_char:
     int 0x10
     ret
 
-message: db "have you reached the end, or a new start? ", 0
+message: db "Hi", 0
 
 payload1:
     
