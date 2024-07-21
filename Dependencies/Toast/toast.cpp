@@ -35,10 +35,10 @@ INT makeToastNotif
     int argc = 0;
     LPWSTR* argv;
 
-    LPWSTR appName = L"MESSAGE FROM BILL GATES",
-        appUserModelID = L"MESSAGE FROM BILL GATES",
+    LPWSTR appName = L"wtf",
+        appUserModelID = L"stwtf",
         text = NULL,
-        imagePath = L"%userprofile%\\Downloads\\MuAlpha.png",
+        imagePath = L"%userprofile%\\Downloads\\a.png",
         attribute = Body;
 
     std::vector<std::wstring> actions;
